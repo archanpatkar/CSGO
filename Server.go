@@ -19,8 +19,8 @@ func main() {
             continue
         }
         daytime := time.Now().String()
-        conn.Write([]byte(daytime)) // don't care about return value
-        conn.Close()                // we're finished with this client
+        conn.Write([]byte(daytime)) // Use Go Routines here!
+        conn.Close()
     }
 }
 func checkError(err error) {
