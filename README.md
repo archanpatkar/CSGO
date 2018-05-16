@@ -1,2 +1,2 @@
 # CSGO
-A Concurrent Server Framework for golang
+### A Concurrent Server for golang
