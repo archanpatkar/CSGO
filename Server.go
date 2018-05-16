@@ -9,6 +9,7 @@ import (
 func main() {
     port := ":8081"
     buffsize := 4096
+    exit_message := "q"
     address, err := net.ResolveTCPAddr("tcp4", port)
     checkError(err)
     ss, err := net.ListenTCP("tcp", address)
@@ -18,11 +19,12 @@ func main() {
         if err != nil {
             continue
         }
-        go handler(conn,buffsize)
+        go handler(conn,buffsize,exit_message)
     }
 }
 
-func handler(conn * net.TCPConn, buffsize int) {
+func handler(conn * net.TCPConn, buffsize int, exit_message string) {
+  // Boiler Plate Code
   data := make([]byte, buffsize)
   _ ,err := conn.Read(data)
   message := string(data[:buffsize])
@@ -31,7 +33,7 @@ func handler(conn * net.TCPConn, buffsize int) {
       goto End
   }
   fmt.Println(message)
-  for message != "q" {
+  for message != exit_message {
     data = make([]byte, buffsize)
     _ ,err := conn.Read(data)
     if err != nil {
