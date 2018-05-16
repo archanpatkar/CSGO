@@ -2,7 +2,7 @@ import socket;
 
 conn = socket.socket();
 
-conn.connect(("localhost",8081));
+conn.connect(("localhost",8001));
 
 data = "";
 while data != "q":
