@@ -4,28 +4,48 @@ import (
     "fmt"
     "net"
     "os"
-    "time"
 )
 
 func main() {
-    service := ":7777"
-    tcpAddr, err := net.ResolveTCPAddr("tcp4", service)
+    port := ":8081"
+    address, err := net.ResolveTCPAddr("tcp4", port)
     checkError(err)
-    listener, err := net.ListenTCP("tcp", tcpAddr)
+    ss, err := net.ListenTCP("tcp", address)
     checkError(err)
     for {
-        conn, err := listener.Accept()
+        conn, err := ss.AcceptTCP()
         if err != nil {
             continue
         }
-        daytime := time.Now().String()
-        conn.Write([]byte(daytime)) // Use Go Routines here!
-        conn.Close()
+        go handler(conn,1024)
     }
 }
+
+func handler(conn * net.TCPConn, buffsize int) {
+  data := make([]byte, buffsize)
+  _ ,err := conn.Read(data)
+  message := string(data[:buffsize])
+  if err != nil {
+      fmt.Fprintf(os.Stderr, "Client Error: %s", err.Error())
+      goto End
+  }
+  fmt.Println(message)
+  for message != "q" {
+    data = make([]byte, buffsize)
+    _ ,err := conn.Read(data)
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Client Error: %s", err.Error())
+        goto End
+    }
+    message = string(data[:buffsize])
+    fmt.Println(message)
+  }
+  End: conn.Close();
+}
+
 func checkError(err error) {
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Fatal error: %s", err.Error())
+        fmt.Fprintf(os.Stderr, "Error: %s", err.Error())
         os.Exit(1)
     }
 }
