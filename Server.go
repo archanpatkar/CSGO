@@ -8,6 +8,7 @@ import (
 
 func main() {
     port := ":8081"
+    buffsize := 4096
     address, err := net.ResolveTCPAddr("tcp4", port)
     checkError(err)
     ss, err := net.ListenTCP("tcp", address)
@@ -17,7 +18,7 @@ func main() {
         if err != nil {
             continue
         }
-        go handler(conn,1024)
+        go handler(conn,buffsize)
     }
 }
 
