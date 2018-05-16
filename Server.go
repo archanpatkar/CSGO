@@ -4,12 +4,21 @@ import (
     "fmt"
     "net"
     "os"
+    "strconv"
 )
 
 func main() {
     port := ":8081"
     buffsize := 4096
     exit_message := "q"
+    if os.Args[1] != "" {
+      port = ":" + os.Args[1]
+    }
+    if os.Args[2] != "" {
+      number, _ := strconv.Atoi(os.Args[2])
+      buffsize = number
+    }
+    fmt.Println("Server Starting on PORT " + port)
     address, err := net.ResolveTCPAddr("tcp4", port)
     checkError(err)
     ss, err := net.ListenTCP("tcp", address)
