@@ -1,7 +1,7 @@
 # CSGO
 ### A Concurrent Server for golang
 
-## How to Use
+## How to use
 > Dependancy Go
 
 ### 1. Download `Server.go`
