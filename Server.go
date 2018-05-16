@@ -18,6 +18,9 @@ func main() {
       number, _ := strconv.Atoi(os.Args[2])
       buffsize = number
     }
+    if os.Args[3] != "" {
+      exit = number
+    }
     fmt.Println("Server Starting on PORT " + port)
     address, err := net.ResolveTCPAddr("tcp4", port)
     checkError(err)
