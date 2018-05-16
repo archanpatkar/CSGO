@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-    port := ":8081"
-    buffsize := 4096
-    exit_message := "q"
+    var port string
+    var buffsize int
+    var exit_message string
     if os.Args[1] != "" {
       port = ":" + os.Args[1]
     }
