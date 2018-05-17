@@ -36,7 +36,6 @@ func main() {
 }
 
 func handler(conn * net.TCPConn, buffsize int, exit_message string) {
-  // Boiler Plate Code
   data := make([]byte, buffsize)
   _ ,err := conn.Read(data)
   message := string(data[:buffsize])
