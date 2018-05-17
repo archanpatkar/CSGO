@@ -1,5 +1,5 @@
 # CSGO
-### A Concurrent Server for golang
+### A Concurrent Server in golang
 
 ## How to use
 > Dependancy Go
