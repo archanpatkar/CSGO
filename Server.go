@@ -48,7 +48,7 @@ func handler(conn * net.TCPConn, buffsize int, exit_message string) {
     data = make([]byte, buffsize)
     _ ,err := conn.Read(data)
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Client Error: %s", err.Error())
+        fmt.Fprintf(os.Stderr, "Client Disconnected %s", err.Error())
         goto End
     }
     message = string(data[:buffsize])
