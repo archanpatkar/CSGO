@@ -2,7 +2,7 @@
 ### A Concurrent Server in golang
 
 ## How to use
-> Dependancy Go
+> Dependancy `Go`
 
 ### 1. Download `Server.go`
 ### 2. The Server takes 3 Args `go run Server.go {PORT} {BUFFER-SIZE} {EXIT-MESSAGE}`
